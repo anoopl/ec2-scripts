@@ -46,5 +46,5 @@ def main():
 	#Modify the security group of instance
 	update_sg = rds2_conn.modify_db_instance(TARGET_DB_INSTANCE_IDENTIFIER, vpc_security_group_ids=DB_VPC_SECURITY_GROUP_ID, backup_retention_period=0)
 
-	if __name__ == "__main__":
-		main()
+if __name__ == "__main__":
+	main()
