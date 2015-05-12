@@ -1,4 +1,4 @@
- #!/usr/bin/python
+#!/usr/bin/python
 import time
 import boto.rds2
 import boto.exception
