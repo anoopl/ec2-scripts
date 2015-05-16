@@ -12,10 +12,11 @@ class EC2_tags_pubdns:
 		#print "back"
 		self.ec2_conn = boto.ec2.connect_to_region(self.AWS_REGION)
 
-
 	def create_ec2_conn(self):
 		print "Creating EC2 Connection"
+		print self.AWS_REGION
 		self.ec2_conn = boto.ec2.connect_to_region(self.AWS_REGION)
+		print self.ec2_conn 
 
 	def get_tags_pubdns(self):
 		print "Getting info:"
@@ -33,6 +34,7 @@ class EC2_tags_pubdns:
 def main():
 	AWS_REGION = 'us-east-1'
 	tag_dns_display = EC2_tags_pubdns('us-east-1')
+	#tag_dns_display.create_ec2_conn()
 	tag_dns_display.get_tags_pubdns()
 
 
