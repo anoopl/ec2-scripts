@@ -8,15 +8,15 @@ class EC2_tags_pubdns:
 		self.AWS_REGION = AWS_REGION
 		#self.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
 		#self.AWS_SECRET_ACCESS_KEY =  AWS_SECRET_ACCESS_KEY
-		#self.ec2_conn = self.create_ec2_conn()
-		#print "back"
-		self.ec2_conn = boto.ec2.connect_to_region(self.AWS_REGION)
+		self.ec2_conn = self.create_ec2_conn()
+		#self.ec2_conn = boto.ec2.connect_to_region(self.AWS_REGION)
 
 	def create_ec2_conn(self):
 		print "Creating EC2 Connection"
-		print self.AWS_REGION
+		#print self.AWS_REGION
 		self.ec2_conn = boto.ec2.connect_to_region(self.AWS_REGION)
-		print self.ec2_conn 
+		#print self.ec2_conn 
+		return self.ec2_conn
 
 	def get_tags_pubdns(self):
 		print "Getting info:"
