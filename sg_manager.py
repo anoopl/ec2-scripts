@@ -99,7 +99,7 @@ def parse_arguments():
                         choices=['DEBUG','INFO','WARN','ERROR'],
                         help='Log level')
     parser.add_argument('--region',default='us-east-1',type=str,help='Default region to use')
-    parser.add_argument('--yaml',default='sg.yml',type=str,help='Default region to use')
+    parser.add_argument('--yaml',default='sg_manager.yml',type=str,help='Default region to use')
     parser.add_argument('--dry_run',default=False,action='store_true',help='Dry run for audit')
     args = parser.parse_args()
     return args
