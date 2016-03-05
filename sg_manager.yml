@@ -1,0 +1,8 @@
+security-group web-sg:
+  description: 'Allow port 80 & 443 from the world'
+  ingress-rules: { 81: tcp, 443: tcp }
+  egress-rules: { 0-65535: all-tcp }
+security-group dns-sg:
+  description: 'Allow port 53 from the world'
+  ingress-rules: { 53: udp, 53: udp }
+  egress-rules: { 0-65535: all-tcp }
