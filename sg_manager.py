@@ -64,6 +64,8 @@ def check_sg_rules(all_sg,sg_not_defined,sg_dict,region,dry_run):
                                 group_id = sec_group_rules['SecurityGroups'][0]['GroupId']
                                 conn = boto.ec2.connect_to_region(region)
                                 conn.authorize_security_group_egress(group_id, 'tcp', from_port=int(from_port), to_port=int(to_port), cidr_ip='0.0.0.0/0')
+                                #TO DO
+                                #Boto3 authorize_security_group_egress has a bug so using Boto2
                                 #client.authorize_security_group_egress(GroupId=group_id,IpProtocol='tcp',
                                 #CidrIp="0.0.0.0/0",FromPort=int(from_port),ToPort=int(to_port))
 
