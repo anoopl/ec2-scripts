@@ -7,6 +7,8 @@ import boto.ec2
 
 
 def read_from_yaml(yml_file):
+    """Read yaml and return dictionary
+    """
     logging.info("reading yaml file: %s" % yml_file)
     sg_dict = {}
     yaml_stream = open(yml_file, "r")
@@ -14,11 +16,13 @@ def read_from_yaml(yml_file):
     for security_group in security_groups:
         sg_dict = {sg_name: sg_attributes for (sg_name, sg_attributes) in security_group.items()}
         yaml_stream.close()
-        #logging.info("sg_dict: %s" % sg_dict)
+        logging.debug("sg_dict: %s" % sg_dict)
         return sg_dict
 
 
 def get_sg_not_defined(sg,sg_dict):
+    """Get Security Groups not defined on yaml file
+    """
     logging.info("Getting security groups not defined on yaml")
     sg_not_defined = []
     for group in sg:
@@ -29,6 +33,8 @@ def get_sg_not_defined(sg,sg_dict):
 
 
 def check_sg_rules(all_sg,sg_not_defined,sg_dict,region,dry_run):
+    """Check Security Group Rules and modify
+    """
     logging.info("Checking secuiry Group rules")
     client = boto3.client('ec2',region_name=region)
     ec2 = boto3.resource('ec2',region_name=region)
@@ -80,12 +86,16 @@ def check_sg_rules(all_sg,sg_not_defined,sg_dict,region,dry_run):
 
 
 def get_all_security_groups(region):
+    """Get all security Groups
+    """
     ec2 = boto3.resource('ec2',region_name=region)
     sec_groups = ec2.security_groups.all()
     return sec_groups
 
 
 def configure_logging(log_level):
+    """Logging function
+    """
     numeric_level = getattr(logging, log_level.upper(), None)
     if not isinstance(numeric_level, int):
         raise ValueError('Invalid log level: %s' % log_level)
@@ -98,8 +108,8 @@ def parse_arguments():
     parser.add_argument('--log','-l', default='WARN', type=str.upper ,
                         choices=['DEBUG','INFO','WARN','ERROR'],
                         help='Log level')
-    parser.add_argument('--region',default='us-east-1',type=str,help='Default region to use')
-    parser.add_argument('--yaml',default='sg_manager.yml',type=str,help='Default region to use')
+    parser.add_argument('--region',default='us-east-1',type=str,help='EC2 region to use')
+    parser.add_argument('--yaml',default='sg_manager.yml',type=str,help='YAML File with rules')
     parser.add_argument('--dry_run',default=False,action='store_true',help='Dry run for audit')
     args = parser.parse_args()
     return args
